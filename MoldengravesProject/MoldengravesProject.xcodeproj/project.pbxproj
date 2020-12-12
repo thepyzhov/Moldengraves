@@ -12,7 +12,7 @@
 		25CB8F2B258337DB00A850E9 /* cute_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25CB8F2A258337DB00A850E9 /* cute_image.jpg */; };
 		25CB8F2D258337DB00A850E9 /* nice_music.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 25CB8F2C258337DB00A850E9 /* nice_music.ogg */; };
 		25CB8F2F258337DB00A850E9 /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25CB8F2E258337DB00A850E9 /* sansation.ttf */; };
-		25CB8F31258337DB00A850E9 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 25CB8F30258337DB00A850E9 /* icon.png */; };
+		25CB8F3D2583685A00A850E9 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 25CB8F3C2583685900A850E9 /* icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,8 +24,13 @@
 		25CB8F2A258337DB00A850E9 /* cute_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = cute_image.jpg; path = ../cute_image.jpg; sourceTree = "<group>"; };
 		25CB8F2C258337DB00A850E9 /* nice_music.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; name = nice_music.ogg; path = ../nice_music.ogg; sourceTree = "<group>"; };
 		25CB8F2E258337DB00A850E9 /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = sansation.ttf; path = ../sansation.ttf; sourceTree = "<group>"; };
-		25CB8F30258337DB00A850E9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
 		25CB8F39258339A000A850E9 /* MoldengravesProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoldengravesProject.entitlements; sourceTree = "<group>"; };
+		25CB8F3C2583685900A850E9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = MoldengravesProject/icon.png; sourceTree = SOURCE_ROOT; };
+		25CB8F3F2583C37B00A850E9 /* sfml-audio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-audio.framework"; path = "../../../../../../Library/Frameworks/sfml-audio.framework"; sourceTree = "<group>"; };
+		25CB8F402583C37B00A850E9 /* sfml-network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-network.framework"; path = "../../../../../../Library/Frameworks/sfml-network.framework"; sourceTree = "<group>"; };
+		25CB8F412583C37C00A850E9 /* sfml-system.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-system.framework"; path = "../../../../../../Library/Frameworks/sfml-system.framework"; sourceTree = "<group>"; };
+		25CB8F422583C37C00A850E9 /* sfml-window.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-window.framework"; path = "../../../../../../Library/Frameworks/sfml-window.framework"; sourceTree = "<group>"; };
+		25CB8F432583C37C00A850E9 /* sfml-graphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-graphics.framework"; path = "../../../../../../Library/Frameworks/sfml-graphics.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +49,7 @@
 			children = (
 				25CB8F21258337DB00A850E9 /* MoldengravesProject */,
 				25CB8F20258337DB00A850E9 /* Products */,
+				25CB8F3E2583C37B00A850E9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,9 +88,21 @@
 				25CB8F2A258337DB00A850E9 /* cute_image.jpg */,
 				25CB8F2C258337DB00A850E9 /* nice_music.ogg */,
 				25CB8F2E258337DB00A850E9 /* sansation.ttf */,
-				25CB8F30258337DB00A850E9 /* icon.png */,
+				25CB8F3C2583685900A850E9 /* icon.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		25CB8F3E2583C37B00A850E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				25CB8F3F2583C37B00A850E9 /* sfml-audio.framework */,
+				25CB8F432583C37C00A850E9 /* sfml-graphics.framework */,
+				25CB8F402583C37B00A850E9 /* sfml-network.framework */,
+				25CB8F412583C37C00A850E9 /* sfml-system.framework */,
+				25CB8F422583C37C00A850E9 /* sfml-window.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -97,7 +115,7 @@
 				25CB8F1A258337DB00A850E9 /* Sources */,
 				25CB8F1B258337DB00A850E9 /* Frameworks */,
 				25CB8F1C258337DB00A850E9 /* Resources */,
-				25CB8F1D258337DB00A850E9 /* ShellScript */,
+				25CB8F1D258337DB00A850E9 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -145,7 +163,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25CB8F31258337DB00A850E9 /* icon.png in Resources */,
+				25CB8F3D2583685A00A850E9 /* icon.png in Resources */,
 				25CB8F2F258337DB00A850E9 /* sansation.ttf in Resources */,
 				25CB8F2D258337DB00A850E9 /* nice_music.ogg in Resources */,
 				25CB8F2B258337DB00A850E9 /* cute_image.jpg in Resources */,
@@ -155,7 +173,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		25CB8F1D258337DB00A850E9 /* ShellScript */ = {
+		25CB8F1D258337DB00A850E9 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
 			files = (
@@ -164,6 +182,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -282,6 +301,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U59AG2293A;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = "MoldengravesProject/MoldengravesProject-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -295,6 +318,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U59AG2293A;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = "MoldengravesProject/MoldengravesProject-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
