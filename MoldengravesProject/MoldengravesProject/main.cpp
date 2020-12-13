@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
+#include <string>
 
 // Here is a small helper for you! Have a look.
 #include "ResourcePath.hpp"
@@ -47,6 +48,22 @@ int main(int, char const**)
     sf::RenderWindow window(sf::VideoMode(1440, 900), "Moldengraves");
     window.setFramerateLimit(60);
     
+    sf::Image icon;
+    if (!icon.loadFromFile(resourcePath() + "icon.png")) {
+        return EXIT_FAILURE;
+    }
+    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+    
+    sf::Font font;
+    if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
+        std::cout << "Can't load font." << std::endl;
+        return EXIT_FAILURE;
+    }
+    
+    sf::Text fpsText("FPS: ", font, 24);
+    fpsText.setPosition(5, 0);
+    fpsText.setFillColor(sf::Color::White);
+    
     sf::VertexArray lines(sf::Lines, 18 * screenWidth);
     
     // Player
@@ -61,12 +78,6 @@ int main(int, char const**)
     int frameCounter = 0;
     int64_t frameTimeMicro = 0;
 
-    sf::Image icon;
-    if (!icon.loadFromFile(resourcePath() + "icon.png")) {
-        return EXIT_FAILURE;
-    }
-    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-
     // Start the game loop
     while (window.isOpen())
     {
@@ -75,7 +86,8 @@ int main(int, char const**)
             float fps = (float) frameCounter / dtCounter;
             frameTimeMicro /= frameCounter;
             // Text output can be placed here
-            std::cout << "FPS: " << fps << std::endl;
+            fpsText.setString("FPS: " + std::to_string(fps));
+            //std::cout << "FPS: " << fps << std::endl;
             dtCounter = 0.0f;
             frameCounter = 0;
             frameTimeMicro = 0;
@@ -86,6 +98,8 @@ int main(int, char const**)
         //speed modifiers
         double moveSpeed = 5.0 * dt; //the constant value is in squares/second
         double rotSpeed = 3.0 * dt; //the constant value is in radians/second
+        
+        int prevMousePosX = sf::Mouse::getPosition(window).x;
         
         // Process events
         sf::Event event;
@@ -101,9 +115,29 @@ int main(int, char const**)
                 window.close();
             }
             
-//            // Mouse x, y
+            // Mouse movement
 //            if (event.type == sf::Event::MouseMoved) {
 //                std::cout << "Mouse (" << event.mouseMove.x << ", " << event.mouseMove.y << ")" << std::endl;
+//                if (event.mouseMove.x < prevMousePosX) {
+//                    float oldDirX = direction.x;
+//                    direction.x = direction.x * cos(rotSpeed) - direction.y * sin(rotSpeed);
+//                    direction.y = oldDirX * sin(rotSpeed) + direction.y * cos(rotSpeed);
+//
+//                    float oldPlaneX = plane.x;
+//                    plane.x = plane.x * cos(rotSpeed) - plane.y * sin(rotSpeed);
+//                    plane.y = oldPlaneX * sin(rotSpeed) + plane.y * cos(rotSpeed);
+//                }
+//
+//                if (event.mouseMove.y > prevMousePosX) {
+//                    float oldDirX = direction.x;
+//                    direction.x = direction.x * cos(-rotSpeed) - direction.y * sin(-rotSpeed);
+//                    direction.y = oldDirX * sin(-rotSpeed) + direction.y * cos(-rotSpeed);
+//
+//                    float oldPlaneX = plane.x;
+//                    plane.x = plane.x * cos(-rotSpeed) - plane.y * sin(-rotSpeed);
+//                    plane.y = oldPlaneX * sin(-rotSpeed) + plane.y * cos(-rotSpeed);
+//                }
+//
 //            }
             
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
@@ -153,26 +187,24 @@ int main(int, char const**)
             );
             
             float perpWallDist;
-            
-            int stepX;
-            int stepY;
+            sf::Vector2i step;
             
             int hit = 0;
             int side;
             
             if (rayDir.x < 0) {
-                stepX = -1;
+                step.x = -1;
                 sideDist.x = (position.x - mapPos.x) * deltaDist.x;
             } else {
-                stepX = 1;
+                step.x = 1;
                 sideDist.x = (mapPos.x + 1.0 - position.x) * deltaDist.x;
             }
             
             if (rayDir.y < 0) {
-                stepY = -1;
+                step.y = -1;
                 sideDist.y = (position.y - mapPos.y) * deltaDist.y;
             } else {
-                stepY = 1;
+                step.y = 1;
                 sideDist.y = (mapPos.y + 1.0 - position.y) * deltaDist.y;
             }
             
@@ -180,11 +212,11 @@ int main(int, char const**)
             while (hit == 0) {
                 if (sideDist.x < sideDist.y) {
                     sideDist.x += deltaDist.x;
-                    mapPos.x += stepX;
+                    mapPos.x += step.x;
                     side = 0;
                 } else {
                     sideDist.y += deltaDist.y;
-                    mapPos.y += stepY;
+                    mapPos.y += step.y;
                     side = 1;
                 }
                 if (worldMap[mapPos.x][mapPos.y] > 0) {
@@ -193,9 +225,9 @@ int main(int, char const**)
             }
             
             if (side == 0) {
-                perpWallDist = (mapPos.x - position.x + (1- stepX) / 2) / rayDir.x;
+                perpWallDist = (mapPos.x - position.x + (1- step.x) / 2) / rayDir.x;
             } else {
-                perpWallDist = (mapPos.y - position.y + (1- stepY) / 2) / rayDir.y;
+                perpWallDist = (mapPos.y - position.y + (1- step.y) / 2) / rayDir.y;
             }
             int h = 400;
             
@@ -232,6 +264,7 @@ int main(int, char const**)
         
         window.clear();
         window.draw(lines);
+        window.draw(fpsText);
         frameTimeMicro = clock.getElapsedTime().asMicroseconds();
         window.display();
     }
