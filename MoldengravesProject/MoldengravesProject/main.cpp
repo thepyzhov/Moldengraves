@@ -6,6 +6,7 @@
 // Here is a small helper for you! Have a look.
 #include "ResourcePath.hpp"
 
+// Size of the world map
 const int mapWidth = 24;
 const int mapHeight = 24;
 
@@ -43,23 +44,16 @@ int SCREEN_HEIGHT = 900;
 int main(int, char const**)
 {
     sf::RenderWindow window(sf::VideoMode(1440, 900), "Moldengraves");
-//    sf::View playerView;
-//    playerView.reset(sf::FloatRect(200.f, 200.f, 0, 0));
-//
-//    window.setView(playerView);
-
-    sf::Image icon;
-    if (!icon.loadFromFile(resourcePath() + "icon.png")) {
-        return EXIT_FAILURE;
-    }
-    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
     
+    sf::VertexArray lines(sf::Lines, 18 * SCREEN_WIDTH);
+    // Player
     int posX = 22;
     int posY = 12;
     
     int dirX = -1;
     int dirY = 0;
     
+    // Camera
     double planeX = 0;
     double planeY = 0.66;
     
@@ -74,6 +68,12 @@ int main(int, char const**)
     //speed modifiers
     double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
     double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
+
+    sf::Image icon;
+    if (!icon.loadFromFile(resourcePath() + "icon.png")) {
+        return EXIT_FAILURE;
+    }
+    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
     // Start the game loop
     while (window.isOpen())
@@ -138,7 +138,7 @@ int main(int, char const**)
                 stepX = -1;
                 sideDistX = (posX - mapX) * deltaDistX;
             } else {
-                stepX = -1;
+                stepX = 1;
                 sideDistX = (mapX + 1.0 - posX) * deltaDistX;
             }
             
@@ -146,7 +146,7 @@ int main(int, char const**)
                 stepY = -1;
                 sideDistY = (posY - mapY) * deltaDistY;
             } else {
-                stepY = -1;
+                stepY = 1;
                 sideDistY = (mapY + 1.0 - posY) * deltaDistY;
             }
             
